@@ -1,5 +1,6 @@
 // middleware/auth.js
 const jwt = require('jsonwebtoken');
+//const User = require('../models/userModel');
 
 const authenticateUser = async (req, res, next) => {
     try {
@@ -20,4 +21,11 @@ const authenticateUser = async (req, res, next) => {
         res.status(500).json({ error: err.message });
     }
 };
-module.exports = authenticateUser;
+
+
+
+
+module.exports = 
+  
+    authenticateUser;
+

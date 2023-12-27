@@ -8,7 +8,7 @@ const userRouter = express.Router();
 
 userRouter.post('/register', async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password , userType} = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -19,6 +19,7 @@ userRouter.post('/register', async (req, res) => {
       username,
       email,
       password,
+      userType: userType || 'user', // Default to 'user' if not provided
     });
 
     await newUser.save();

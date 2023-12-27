@@ -2,10 +2,12 @@
 const express = require('express');
 const Product = require('../models/productModel');
 const authenticateUser = require('../mid/auth_mid');
+const admin = require('../mid/admin_mid');
+
 
 const productRouter = express.Router();
 
-productRouter.get('/products',authenticateUser, async (req, res) => {
+productRouter.get('/products',authenticateUser,admin, async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);
@@ -16,7 +18,7 @@ productRouter.get('/products',authenticateUser, async (req, res) => {
 });
 
 // Add Product
-productRouter.post('/add-product',authenticateUser, async (req, res) => {
+productRouter.post('/add-product',authenticateUser,admin, async (req, res) => {
     try {
       const { name, quantity,price, description } = req.body;
   

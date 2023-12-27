@@ -50,6 +50,7 @@ userRouter.post('/login', async (req, res) => {
         userId: user._id,
         username: user.username,
         email: user.email,
+        userType:user.userType
         // Add more properties as needed
       };
   

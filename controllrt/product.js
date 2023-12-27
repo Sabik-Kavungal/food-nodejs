@@ -7,7 +7,7 @@ const admin = require('../mid/admin_mid');
 
 const productRouter = express.Router();
 
-productRouter.get('/products',authenticateUser,admin, async (req, res) => {
+productRouter.get('/products',authenticateUser, async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);

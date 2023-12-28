@@ -5,50 +5,7 @@ const Product = require('../models/productModel');
 const authenticateUser = require('../mid/auth_mid');
 const User = require('../models/userModel');
 const cartRouter = express.Router();
-// cartRouter.post('/add-cart', authenticateUser, async (req, res) => {
-//     try {
-//       const { userId, productId } = req.body;
-  
-//       // Check if the request body is valid
-//       if (!userId || !productId) {
-//         return res.status(400).json({ error: 'Invalid request body.' });
-//       }
-  
-//       const cart = await Cart.findOne({ user: userId });
-  
- 
-//       // If a single product is provided, add it to the cart
-//       const existingItem = cart.items.find(cartItem =>
-//         cartItem.product.equals(productId)
-//       );
-  
-//       if (existingItem) {
-//         existingItem.quantity += 1; // You may adjust the quantity increment as needed
-//       } else {
-//         const product = await Product.findById(productId);
-  
-//         if (!product) {
-//           return res
-//             .status(404)
-//             .json({ msg: `Product with ID ${productId} not found.` });
-//         }
-  
-//         cart.items.push({
-//           product: productId,
-//           quantity: product.quantity, // You may set the default quantity as needed
-//           name: product.name,
-//           price: product.price,
-//         });
-//       }
-  
-//       // Save the updated cart
-//       await cart.save();
-//       res.json(cart);
-//     } catch (e) {
-//       console.error(e);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
+
 
 cartRouter.post('/add-cart', authenticateUser, async (req, res) => {
     try {
@@ -187,50 +144,6 @@ cartRouter.post('/add-cart', authenticateUser, async (req, res) => {
     }
   });
 
-//   cartRouter.delete('/remove-from-cart', authenticateUser, async (req, res) => {
-//     try {
-//       const { userId } = req.body;
-//       const { productId } =  req.body;
-  
-//       // Check if the request body is valid
-//       if (!userId || !productId) {
-//         return res.status(400).json({ error: 'Invalid request body.' });
-//       }
-  
-//       // Find the user's cart
-//       let cart = await Cart.findOne({ user: userId items : {productId},});
-  
-//       if (!cart) {
-//         return res.status(404).json({ error: 'Cart not found.' });
-//       }
-  
-//       // Check if the product exists in the cart
-//       const existingItemIndex = cart.items.findIndex((cartItem) =>
-//         cartItem.product.equals(productId)
-//       );
-  
-//       if (existingItemIndex !== -1) {
-//         // If quantity is greater than 1, decrement it; otherwise, remove the item
-//         if (cart.items[existingItemIndex].quantity > 1) {
-//           cart.items[existingItemIndex].quantity -= 1;
-//         } else {
-//           cart.items.splice(existingItemIndex, 1);
-//         }
-  
-//         // Save the updated cart
-//         await cart.save();
-  
-//         // Respond with the updated cart
-//         res.json(cart);
-//       } else {
-//         return res.status(404).json({ error: 'Product not found in the cart.' });
-//       }
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//     }
-//   });
-  
 
   cartRouter.get("/carts", authenticateUser, async (req, res) => {
     try {

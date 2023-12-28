@@ -27,21 +27,21 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.pre('save', async function (next) {
-  const user = this;
-  if (user.isModified('password')) {
-    user.password = await bcrypt.hash(user.password, 10);
-  }
-  next();
-});
+// userSchema.pre('save', async function (next) {
+//   const user = this;
+//   if (user.isModified('password')) {
+//     user.password = await bcrypt.hash(user.password, 10);
+//   }
+//   next();
+// });
 
-userSchema.methods.comparePassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
-};
+// userSchema.methods.comparePassword = async function (password) {
+//   return await bcrypt.compare(password, this.password);
+// };
 
-userSchema.methods.generateAuthToken = function () {
-  return jwt.sign({ userId: this._id }, 'passwordKey', { expiresIn: '1h' });
-};
+// userSchema.methods.generateAuthToken = function () {
+//   return jwt.sign({ userId: this._id }, 'passwordKey', { expiresIn: '1h' });
+// };
 
 const User = mongoose.model('User', userSchema);
 
